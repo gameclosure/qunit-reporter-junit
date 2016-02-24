@@ -30,6 +30,15 @@
 	});
 
 	QUnit.moduleStart(function(data) {
+	    currentRun = {
+			modules: [],
+			total: 0,
+			passed: 0,
+			failed: 0,
+			start: new Date(),
+			time: 0
+		};
+
 		currentModule = {
 			name: data.name,
 			tests: [],
@@ -101,6 +110,20 @@
 	});
 
 	QUnit.moduleDone(function(data) {
+	    if (!currentModule) {
+			currentModule = {
+				name: data.module || 'default',
+				tests: [],
+				total: 0,
+				passed: 0,
+				failed: 0,
+				start: new Date(),
+				time: 0,
+				stdout: [],
+				stderr: []
+			};
+	    }
+
 		currentModule.time = (new Date()).getTime() - currentModule.start.getTime();  // ms
 		currentModule.total = data.total;
 		currentModule.passed = data.passed;
