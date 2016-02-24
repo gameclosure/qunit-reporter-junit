@@ -333,7 +333,8 @@
 		// Invoke the user-defined callback
 		QUnit.jUnitReport({
 			results: results,
-			xml: xmlWriter.getString()
+			xml: xmlWriter.getString(),
+			modules: run.modules
 		});
 	};
 
